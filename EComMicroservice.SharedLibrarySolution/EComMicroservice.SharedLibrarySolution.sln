@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EComMicro.SharedLibrary", "EComMicro.SharedLibrary\EComMicro.SharedLibrary.csproj", "{A82FA55C-7691-41AA-94BC-01F266A438CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A82FA55C-7691-41AA-94BC-01F266A438CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82FA55C-7691-41AA-94BC-01F266A438CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82FA55C-7691-41AA-94BC-01F266A438CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82FA55C-7691-41AA-94BC-01F266A438CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6ED15693-C6BD-426B-8C89-6DE3543FE8AC}
+	EndGlobalSection
+EndGlobal
