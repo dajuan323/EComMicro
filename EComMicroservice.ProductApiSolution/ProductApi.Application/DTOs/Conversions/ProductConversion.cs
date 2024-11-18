@@ -15,12 +15,12 @@ public static class ProductConversion
     public static (ProductDTO?, IEnumerable<ProductDTO>?) FromEntity(Product product, IEnumerable<Product>? products)
     {
         // return single
-        if (product is null || products is null)
+        if (product is not null && products is null)
         {
             var singleProduct = new ProductDTO
                 (
                     product!.Id,
-                    product.Name!,
+                    product.Name ?? "Unknown",
                     product.Quantity,
                     product.Price
                 );
@@ -29,10 +29,10 @@ public static class ProductConversion
         }
 
         // return list
-        if (product is not null || products is null)
+        if (product is null && products is not null)
         {
             var _products = products.Select(p =>
-                new ProductDTO(p.Id, p.Name, p.Quantity, p.Price)).ToList();
+                new ProductDTO(p.Id, p.Name ?? "Unknown", p.Quantity, p.Price)).ToList();
 
             return (null, _products);
         }

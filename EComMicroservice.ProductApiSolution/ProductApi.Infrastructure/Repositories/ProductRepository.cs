@@ -10,6 +10,11 @@ namespace ProductApi.Infrastructure.Repositories;
 
 public class ProductRepository(ProductDbContext dbContext) : IProduct
 {
+    /// <summary>
+    /// Creates instance of Product
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
     public async Task<Response> CreateAsync(Product entity)
     {
         try
@@ -37,6 +42,12 @@ public class ProductRepository(ProductDbContext dbContext) : IProduct
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+
     public async Task<Response> DeleteAsync(Product entity)
     {
         try
@@ -59,6 +70,12 @@ public class ProductRepository(ProductDbContext dbContext) : IProduct
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public async Task<Product> FindByIdAsync(int id)
     {
         try
@@ -76,6 +93,11 @@ public class ProductRepository(ProductDbContext dbContext) : IProduct
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
     public async Task<IEnumerable<Product>> GetAllAsync()
     {
         try
@@ -91,6 +113,12 @@ public class ProductRepository(ProductDbContext dbContext) : IProduct
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
     public async Task<Product> GetByAsync(Expression<Func<Product, bool>> predicate)
     {
         try
@@ -107,6 +135,11 @@ public class ProductRepository(ProductDbContext dbContext) : IProduct
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
     public async Task<Response> UpdateAsync(Product entity)
     {
         try
@@ -120,7 +153,7 @@ public class ProductRepository(ProductDbContext dbContext) : IProduct
             await dbContext.SaveChangesAsync();
             return new Response(true, $"{entity.Name} is updated successfully.");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             LogException.LogExceptions(ex);
             // Display scary-free message

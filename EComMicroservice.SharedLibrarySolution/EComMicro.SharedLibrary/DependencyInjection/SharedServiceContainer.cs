@@ -16,7 +16,7 @@ public static class SharedServiceContainer
         // Add Generic DB context
         services.AddDbContext<TContext>(option => option.UseSqlServer(
             config
-            .GetConnectionString("eComConnection"), sqlserverOption =>
+            .GetConnectionString("eCommerceConnection"), sqlserverOption =>
             sqlserverOption.EnableRetryOnFailure()));
 
         // Configure serilog logging
@@ -41,7 +41,7 @@ public static class SharedServiceContainer
         app.UseMiddleware<GlobalException>();
 
         // Register middleware to block all outside API calls
-        app.UseMiddleware<ListenOnlyToApiGateway>();
+        //app.UseMiddleware<ListenOnlyToApiGateway>();
 
         return app;
     }
