@@ -16,7 +16,7 @@ This project is an E-Commerce API built using **.NET Core** and designed with a 
   
 ## Tech Stack
 
-- **Backend**: .NET 6/7 (C#)
+- **Backend**: .NET 8 (C#)
 - **API Communication**: RESTful APIs, gRPC (if applicable)
 - **Message Broker**: RabbitMQ, Apache Kafka (depending on your setup)
 - **Database**: SQL Server, MongoDB, or any other DB per service
