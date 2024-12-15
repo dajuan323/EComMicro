@@ -45,6 +45,7 @@ public class GlobalException(RequestDelegate next)
                 statusCode = StatusCodes.Status403Forbidden;
                 await ModifyHeader(context, title, message, statusCode);
             }
+
         }
         catch (Exception ex)
         {
