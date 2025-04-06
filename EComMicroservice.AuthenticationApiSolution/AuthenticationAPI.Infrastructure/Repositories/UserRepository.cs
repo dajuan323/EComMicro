@@ -13,7 +13,7 @@ using System.Text;
 
 namespace AuthenticationAPI.Infrastructure.Repositories;
 
-public class UserRepository(AuthenticationDbContext context, IUser userInterface, IConfiguration config) : IUser
+public class UserRepository(AuthenticationDbContext context, IConfiguration config) : IUser
 {
     private IConfiguration _config = config;
     private async Task<AppUser> GetUserByEmail(string email)
@@ -67,7 +67,7 @@ public class UserRepository(AuthenticationDbContext context, IUser userInterface
             audience: _config["Authentication:Audience"],
             claims: claims,
             expires: null,
-            signingCredentials: credentials,
+            signingCredentials: credentials
             );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
@@ -76,7 +76,7 @@ public class UserRepository(AuthenticationDbContext context, IUser userInterface
     public async Task<Response> Register(AppUserDTO appUserDTO)
     {
         var getUser = await GetUserByEmail(appUserDTO.Email);
-        if (getUser == null) return new Response(false, $"Email ( {appUserDTO.Email} ) may not be used for registration.");
+        if (getUser is not null) return new Response(false, $"Email ( {appUserDTO.Email} ) may not be used for registration.");
 
         var result = context.Users.Add(new AppUser()
         {
