@@ -1,4 +1,5 @@
 ﻿using EComMicro.SharedLibrary.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.App.DTOs;
 using OrderApi.App.DTOs.Conversions;
@@ -9,6 +10,7 @@ namespace OrderApi.Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "Admin")]
 public class OrdersController(IOrder orderInterface, IOrderService orderService) : ControllerBase
 {
     [HttpGet]

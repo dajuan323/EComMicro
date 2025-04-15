@@ -29,7 +29,7 @@ public class OrderService(IOrder orderInterface, HttpClient http,
     {
         // Call API
         // Redirect call to the API Gateway since product API does not respond to outsiders
-        var getUser = await http.GetAsync($"http://localhost:5000/api/Authentication/{userId}");
+        var getUser = await http.GetAsync($"api/Authentication/{userId}");
         if (!getUser.IsSuccessStatusCode)
             return null!;
 

@@ -1,4 +1,5 @@
 ﻿using EComMicro.SharedLibrary.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductApi.Application.DTOs;
@@ -9,6 +10,7 @@ namespace ProductApi.Presentation.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[AllowAnonymous]
 public class ProductsController(IProduct productInterface) : ControllerBase
 {
     [HttpGet]
@@ -39,6 +41,7 @@ public class ProductsController(IProduct productInterface) : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<Response>> CreateProduct(ProductDTO product)
     {
         // check model state is all data annotations are passed
@@ -52,6 +55,8 @@ public class ProductsController(IProduct productInterface) : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(Roles = "Admin")]
+
     public async Task<ActionResult<Response>> UpdateProduct(ProductDTO product)
     {
         // check model state is all data annotations are passed
@@ -65,6 +70,7 @@ public class ProductsController(IProduct productInterface) : ControllerBase
     }
 
     [HttpDelete]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<Response>> DeleteProduct(ProductDTO product)
     {
         // convert to entity
