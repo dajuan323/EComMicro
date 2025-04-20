@@ -62,7 +62,7 @@ public class ProductControllerTest
         // Arrange
         List<Product>? products = new();
 
-        // Set up fake reponse for GetAllAsync();
+        // Set up fake response for GetAllAsync();
         A.CallTo(() => productInterface.GetAllAsync()).Returns(products);
 
         // Act
@@ -78,6 +78,52 @@ public class ProductControllerTest
         message.Should().Be("No products detected in database.");
     }
 
+    // GET PRODUCT BY ID
+    [Fact]
+    public async Task GetProductById_WhenProductExists_ReturnOkResultWithProduct()
+    {
+        // Arrange
+        Product product = new() { Id = 1, Name = "Product 1", Quantity = 10, Price = 100.70m };
+
+        // Set up fake response for GetById
+        A.CallTo(() => productInterface.FindByIdAsync(1)).Returns(product);
+
+        // Act
+        var result = await productsController.GetProduct(1);
+
+        // Assert
+        var okayResult = result.Result as OkObjectResult;
+        okayResult.Should().NotBeNull();
+        okayResult.StatusCode.Should().Be(StatusCodes.Status200OK);
+
+        var returnedProduct = okayResult.Value as ProductDTO;
+        returnedProduct.Should().NotBeNull();
+        returnedProduct.Id.Should().Be(1);
+    }
+
+    [Fact]
+    public async Task GetProductById_WhenProductDoesNotExist_ReturnNotFoundResponse()
+    {
+        // Arrange
+        Product product = new();
+
+        // Set up fake response for GetById
+        A.CallTo(() => productInterface.FindByIdAsync(1)).Returns(value: (Product?)null);
+
+        // Act
+        var result = await productsController.GetProduct(1);
+
+        // Assert
+        var notFoundResult = result.Result as NotFoundObjectResult;
+
+        notFoundResult.Should().NotBeNull();
+        notFoundResult.StatusCode.Should().Be(StatusCodes.Status404NotFound);
+
+        var message = notFoundResult.Value as string;
+        message.Should().Be("Product not found");
+    }
+
+    // CREATE
     [Fact]
     public async Task CreateProduct_WhenModelStateIsInvalid_ReturnBadRequest()
     {
@@ -137,6 +183,7 @@ public class ProductControllerTest
         responseResult!.Flag.Should().BeFalse();
     }
 
+    // UPDATE
     [Fact]
     public async Task UpdateProduct_WhenUpdateIsSuccessful_ReturnOkResponse()
     {
@@ -180,6 +227,7 @@ public class ProductControllerTest
         responseResult!.Flag.Should().BeFalse();
     }
 
+    // DELETE
     [Fact]
     public async Task DeleteProduct_WhenDeleteIsSuccessful_ReturnOkResponse()
     {
